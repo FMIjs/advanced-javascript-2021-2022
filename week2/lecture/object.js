@@ -31,8 +31,16 @@ function personFactory(name, age) {
   };
 }
 
-// create a new empty object that has __proto__ ref to the given object as first arg
-var o = Object.create({ getData: function () { return 100; } }, {
+
+var oPrototype = {
+  getData: function () {
+    return 100;
+  }
+};
+
+// create a new object that has __proto__ ref to the given object as first arg
+// and configure the properties a and b.
+var o = Object.create(oPrototype, {
   a: {
     value: 999,
     writable: false
@@ -61,7 +69,7 @@ function Person(name, age) {
   this.age = age;
 }
 
-Person.prototype.data = 123;
+Person.prototype.data = 123; // Person.prototype is not the same as __proto__ !!!
 Person.prototype.getData = function (arg1, arg2, arg3) {
   console.log(arg1, arg2)
   // this - variable that exists in every function and we 
