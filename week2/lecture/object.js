@@ -31,9 +31,30 @@ function personFactory(name, age) {
   };
 }
 
-var o = Object.create({ getData: function () { return 100; } })
+// create a new empty object that has __proto__ ref to the given object as first arg
+var o = Object.create({ getData: function () { return 100; } }, {
+  a: {
+    value: 999,
+    writable: false
+  },
+  b: {
+    configurable: false,
+    writable: false,
+    value: function () {
+      console.log('Hello world!')
+    }
+  }
+})
 
 console.log(o.getData());
+console.log(o.a);
+console.log(o.b());
+
+// nothing will happen because we configured this property with
+// writable: false !!!
+// IN STRICT MODE THIS WILL THROW AN ERROR!
+o.b = function () { console.log('HELLO WORLD!') };
+o.b();
 
 function Person(name, age) {
   this.name = name;
@@ -130,3 +151,37 @@ console.log(ivan2.getData());
 // console.log(testObj.test);
 // testObj.test = 123;
 
+
+
+
+// FOR NEXT TIME:
+function User(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+User.prototype.test = function () {
+  console.log('test');
+};
+
+function Admin(name, age) {
+  // (1)! similar to "super()"
+  User.call(this, name, age);
+  this.type = 'ADMIN!';
+}
+
+// (2)!! similar to "extends"
+Admin.prototype = Object.create(User.prototype);
+
+// what if we do Admin.prototype = User.prototype ???
+// why is it bad?
+
+Admin.prototype.adminTest = function () {
+  console.log('admin test');
+};
+
+var adm = new Admin('Ivan', 20);
+adm.name // > "Ivan"
+adm.age // > 20
+adm.test(); // > "test"
+adm.adminTest(); // > "admin test"
