@@ -175,12 +175,12 @@ function subscribeToChanges(filePath, cb) {
   var sid = setInterval(function () {
     var lastLength = 0;
     console.log(unsubscribe);
-    readFile(filePath).then(content => {
+    readFile(filePath).then(function () {
       if (content.length > lastLength) {
         lastLength = content.length;
         cb();
       }
-    }).catch(err => {
+    }).catch(function (err) {
       console.error(err);
       unsubscribe();
     });
@@ -192,4 +192,4 @@ var unSub = subscribeToChanges('./test.txt', function () {
   console.log('File was changed')
 });
 
-setTimeout(() => { unSub(); }, 6000);
+setTimeout(function () { unSub(); }, 6000);
