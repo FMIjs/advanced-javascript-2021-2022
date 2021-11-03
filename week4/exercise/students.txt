@@ -1,0 +1,6 @@
+# a student may also have three or four own names!
+# the faculty number is always the last number 
+#
+Ivan Ivanov 441
+Petko Petkov 442
+Alex Alexandrov 443
