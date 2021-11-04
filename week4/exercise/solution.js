@@ -31,7 +31,7 @@ readFile('./students.txt')
       acc[fnNumber] = { name: studentName, marks: null };
       return acc;
     }, {});
-    return Promise.all([readFile('./marks.txt'), studentsData])
+    return Promise.all([readFile('./marks.txt'), studentsData]);
     // return readFile('./marks.txt').then(function (content) {
     //   return { content, studentsData };
     // });
