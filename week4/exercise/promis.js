@@ -130,8 +130,9 @@ failingPromisTest.catch(function (err) {
     setTimeout(function () {
       resolve('res from error');
     }, 100)
-  })).then(function(resFromError) {
+  })).then(function (resFromError) {
     console.log(resFromError);
     debugger;
   })
 })
+
