@@ -1,4 +1,10 @@
 const stream = require('stream');
+// const fs = require('fs');
+
+// const readStream = fs.createReadStream('./text.txt');
+// const writeStream = fs.createWriteStream('./output.txt');
+// readStream.pipe(transfromStream).pipe(writeStream);
+
 const data = [1, 2, 3, 4, 5, null];
 
 class MyReadableStream extends stream.Readable {
