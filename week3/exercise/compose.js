@@ -3,7 +3,7 @@ function compose() {
   return function () {
     var args = Array.prototype.slice.call(arguments);
     return fns.reduceRight(function (acc, curr, idx) {
-      return curr.apply(undefined, idx === fns.length ? acc : [acc]);
+      return curr.apply(undefined, idx === fns.length - 1 ? acc : [acc]);
     }, args);
   }
 }
