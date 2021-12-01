@@ -1,0 +1,1 @@
+console.log('HELLO FROM JS IN THE BROWSER');
