@@ -1,33 +1,30 @@
 const Router = require('express').Router;
+const userRouter = require('./userRouter');
 
 const apiRouter = Router();
 
 const users = [
-  {
-    id: 1,
-    firstName: 'Ivan',
-    lastName: 'Ivanov'
-  }
+    {
+        id: 1,
+        firstName: 'Ivan',
+        lastName: 'Ivanov'
+    }
 ];
 
-apiRouter.get('/user', (req, res) => {
-  res.send(users);
-});
+const applyUsersToRequest = (req, res, next) => {
+    res.locals.users = users;
+    next();
+}
 
-apiRouter.get('/user/:id', (req, res) => {
-  res.send(users.find(u => u.id === +req.params.id));
-});
+const authorizationMiddleware = (req, res, next) => {
+    if(req.headers.authorization && req.headers.authorization === '123456'){
+        req.user = req.headers.authorization;
+        next();
+    }else{
+        next(new Error("Unauthorized!"));
+    }
+}
 
-apiRouter.post('/user', (req, res) => {
-  const { firstName, lastName } = req.body;
-
-  users.push({
-    id: users.length + 1,
-    firstName,
-    lastName
-  });
-
-  res.send(users[users.length - 1]);
-});
+apiRouter.use('/user', authorizationMiddleware, applyUsersToRequest, userRouter);
 
 module.exports = apiRouter;
