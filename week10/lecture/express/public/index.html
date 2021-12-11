@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TEST APP</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script async defer src="/index.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <template id="login-form-template">
+    <form id="login-form">
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="text" name="email" />
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" />
+      </div>
+      <div id="wrong-credentials" class="hidden">You username or password is incorrect</div>
+      <button>Login</button>
+    </form>
+  </template>
+  <template id="logged-content-template">
+    <div>
+      <div>HELLO! You are logged in!</div>
+      <button id="logout-btn">Log out</button>
+    </div>
+  </template>
+</body>
+
+</html>
