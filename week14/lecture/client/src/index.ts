@@ -1,29 +1,24 @@
-import { UserRole } from "./enums/user-role";
-import { IUser } from "./interfaces/user";
 import { environment } from './environment/environment';
+import { AppComponent } from './app/app.component';
 
-console.log(environment.API_URL);
+console.log('The environment is: ' + environment.API_URL);
 
-function myFunc(str: string, count: number): string {
-  let result = '';
-  for (let i = 0; i < count; i++) {
-    result += str;
+const userService = {
+  getUsers() {
+    return fetch(`${environment.API_URL}user`)
+      .then(res => res.json())
   }
-  return result;
-}
+};
 
-function userFactory(name: string, age: number): IUser {
-  return {
-    name,
-    age,
-    role: UserRole.USER
+const mainInjector = {
+  instances: {
+    userService
+  },
+  get(name: string) {
+    return (this.instances as any)[name];
   }
-}
+};
 
-const user = userFactory('Ivan', 20);
+const appRoot = new AppComponent(mainInjector);
 
-console.log(user);
-
-const result = myFunc('321', 321);
-
-console.log(result);
+document.getElementById('app-root')?.appendChild(appRoot);

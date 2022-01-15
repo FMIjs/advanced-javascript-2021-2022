@@ -2,8 +2,13 @@ import express from 'express';
 import { connectApi } from './api';
 import { connect } from './database/connect';
 // import { models } from './database/models';
-
+import cors from 'cors'
 const app = express();
+
+app.use(cors({
+  origin: ['http://localhost:9000'],
+  optionsSuccessStatus: 200
+}));
 
 connectApi(app);
 

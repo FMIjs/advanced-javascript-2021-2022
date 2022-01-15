@@ -9,10 +9,17 @@ router.get('/', (req, res, next) => {
   }).catch(next);
 });
 
+// router.get('/:id/posts',); // get all posts for a given users
+// router.get('/:id/posts/:postId',); // get post for a given user with id
+// router.put('/:id/posts/:postId',); // get post for a given user with id
+// router.posts('/:id/posts/:postId',); // get post for a given user with id
+
 router.get('/:id', (req, res, next) => {
-  models.user.findByPk(+req.params.id).then(user => {
+  const withPosts = req.query.include === 'posts'
+  const include = withPosts ? { include: { model: models.post, as: 'posts' } } : undefined;
+  models.user.findByPk(+req.params.id, include).then(user => {
     res.send(user);
-  }).catch(next);
+  }).catch(console.log);
 });
 
 router.put('/:id', (req, res, next) => {

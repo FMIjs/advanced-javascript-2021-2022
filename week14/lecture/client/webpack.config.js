@@ -59,8 +59,9 @@ module.exports = (env) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
+        inject: 'body',
         title: 'My First Webpack App',
-        filename: './index.html'
+        template: './index.html',
       })
     ],
     devServer: {

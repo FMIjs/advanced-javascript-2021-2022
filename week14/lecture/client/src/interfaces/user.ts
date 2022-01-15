@@ -1,7 +1,9 @@
-import { UserRole } from "../enums/user-role";
+import { IPost } from "./post";
 
 export interface IUser {
+  email: string;
+  password: string;
   name: string;
-  age: number;
-  role: UserRole
+  info: string | null;
+  posts?: IPost[]
 }
